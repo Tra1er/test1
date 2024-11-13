@@ -3,78 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime Odcinki</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Anime Stream</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="form-container">
+        <h1>Wybierz Anime i Odcinek</h1>
+        <form id="anime-form">
+            <select id="anime-select">
+                <option value="spyxfamily">Spy x Family</option>
+                <!-- Możesz dodać inne anime tutaj -->
+            </select>
 
-    <div class="container">
-        <header>
-            <h1>Wybierz Anime i Odcinek</h1>
-        </header>
+            <select id="episode-select">
+                <option value="1">Odcinek 1</option>
+                <option value="2">Odcinek 2</option>
+                <option value="3">Odcinek 3</option>
+            </select>
 
-        <main>
-            <section class="anime-selector">
-                <h2>Wybierz Anime</h2>
-                <select id="anime-select" class="custom-select">
-                    <option value="spy-x-family">Spy x Family</option>
-                    <!-- Możesz dodać inne anime tutaj -->
-                </select>
+            <select id="player-select">
+                <option value="vidhide">VidHide</option>
+                <!-- Możesz dodać więcej playerów -->
+            </select>
 
-                <h2>Wybierz Odcinek</h2>
-                <select id="episode-select" class="custom-select">
-                    <option value="1">Odcinek 1</option>
-                    <option value="2">Odcinek 2</option>
-                    <option value="3">Odcinek 3</option>
-                    <!-- Możesz dodać inne odcinki tutaj -->
-                </select>
+            <button type="submit">Załaduj Odcinek</button>
+        </form>
+        
+        <!-- Miejsce na iframe playera -->
+        <div id="player-container">
+            <!-- Tu załadowany będzie player -->
+        </div>
 
-                <h2>Wybierz Player</h2>
-                <select id="player-select" class="custom-select">
-                    <option value="vidhide">VidHide</option>
-                    <!-- Możesz dodać inne playerki tutaj -->
-                </select>
-
-                <button onclick="loadEpisode()" class="load-btn">Załaduj Odcinek</button>
-
-                <div id="player-container" class="player-container">
-                    <!-- Player będzie ładowany tutaj -->
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 - Anime Stream</p>
-        </footer>
+        <div id="error-message" class="error-message" style="display: none;">
+            Odcinek lub anime nie zostały znalezione!
+        </div>
     </div>
 
     <script>
-        const animeEpisodes = {
-            "spy-x-family": {
-                "1": "https://vidhidepre.com/embed/en6ij3y36jeh",
-                "2": "https://vidhidepre.com/embed/gddd7a6iilqh",
-                "3": "https://vidhidepre.com/embed/c6lqbi6jwjrf"
-            }
-        };
+        const form = document.getElementById('anime-form');
+        const playerContainer = document.getElementById('player-container');
+        const errorMessage = document.getElementById('error-message');
 
-        function loadEpisode() {
-            const anime = document.getElementById("anime-select").value;
-            const episode = document.getElementById("episode-select").value;
-            const player = document.getElementById("player-select").value;
-            const playerContainer = document.getElementById("player-container");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-            if (animeEpisodes[anime] && animeEpisodes[anime][episode]) {
-                const episodeUrl = animeEpisodes[anime][episode];
-                if (player === "vidhide") {
-                    playerContainer.innerHTML = `<iframe src="${episodeUrl}" width="100%" height="500" frameborder="0" allowfullscreen></iframe>`;
+            const anime = document.getElementById('anime-select').value;
+            const episode = document.getElementById('episode-select').value;
+            const player = document.getElementById('player-select').value;
+
+            // Zdefiniowanie linków do odcinków
+            const episodes = {
+                "spyxfamily": {
+                    "1": "https://vidhidepre.com/embed/en6ij3y36jeh",
+                    "2": "https://vidhidepre.com/embed/gddd7a6iilqh",
+                    "3": "https://vidhidepre.com/embed/c6lqbi6jwjrf"
                 }
-            } else {
-                playerContainer.innerHTML = "<p>Odcinek lub anime nie zostały znalezione!</p>";
-            }
-        }
-    </script>
+                // Możesz dodać więcej anime i odcinków w tej strukturze
+            };
 
+            // Sprawdzenie, czy odcinek istnieje
+            if (episodes[anime] && episodes[anime][episode]) {
+                playerContainer.innerHTML = `
+                    <iframe src="${episodes[anime][episode]}" frameborder="0" allowfullscreen></iframe>
+                `;
+                errorMessage.style.display = 'none';
+            } else {
+                playerContainer.innerHTML = '';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
