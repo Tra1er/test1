@@ -29,16 +29,14 @@
             <button type="submit">Załaduj Odcinek</button>
         </form>
 
-        <!-- Formularz do dodania nowego anime -->
-        <h2>Dodaj nowe anime</h2>
+        <h2>Dodaj nowe Anime:</h2>
         <form id="add-anime-form">
-            <input type="text" id="new-anime-title" placeholder="Tytuł anime" required>
-            <input type="text" id="new-episode-title" placeholder="Tytuł odcinka" required>
-            <input type="number" id="new-episode-id" placeholder="ID odcinka" required>
-            <input type="url" id="new-video-url" placeholder="URL wideo" required>
+            <input type="text" id="new-anime-title" placeholder="Tytuł Anime" required>
+            <input type="text" id="new-episode-title" placeholder="Tytuł Odcinka" required>
+            <input type="text" id="new-episode-url" placeholder="URL do Wideo" required>
             <button type="submit">Dodaj Anime</button>
         </form>
-        
+
         <!-- Miejsce na iframe playera -->
         <div id="player-container"></div>
 
@@ -49,9 +47,21 @@
 
     <script>
         const form = document.getElementById('anime-form');
+        const addAnimeForm = document.getElementById('add-anime-form');
         const playerContainer = document.getElementById('player-container');
         const errorMessage = document.getElementById('error-message');
 
+        // Wczytanie danych anime z localStorage
+        function loadAnimeData() {
+            return JSON.parse(localStorage.getItem('animeData')) || {};
+        }
+
+        // Zapisanie danych anime do localStorage
+        function saveAnimeData(data) {
+            localStorage.setItem('animeData', JSON.stringify(data));
+        }
+
+        // Obsługa formularza do wyboru anime
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -59,21 +69,10 @@
             const episode = document.getElementById('episode-select').value;
             const player = document.getElementById('player-select').value;
 
-            // Zdefiniowanie linków do odcinków
-            const episodes = {
-                "spyxfamily": {
-                    "1": "https://vidhidepre.com/embed/en6ij3y36jeh",
-                    "2": "https://vidhidepre.com/embed/gddd7a6iilqh",
-                    "3": "https://vidhidepre.com/embed/c6lqbi6jwjrf"
-                }
-                // Możesz dodać więcej anime i odcinków w tej strukturze
-            };
+            const episodes = loadAnimeData();
 
-            // Sprawdzenie, czy odcinek istnieje
             if (episodes[anime] && episodes[anime][episode]) {
-                playerContainer.innerHTML = `  
-                    <iframe src="${episodes[anime][episode]}" frameborder="0" allowfullscreen></iframe>
-                `;
+                playerContainer.innerHTML = `<iframe src="${episodes[anime][episode]}" frameborder="0" allowfullscreen></iframe>`;
                 errorMessage.style.display = 'none';
             } else {
                 playerContainer.innerHTML = '';
@@ -82,42 +81,32 @@
         });
 
         // Obsługa formularza do dodawania anime
-        const addAnimeForm = document.getElementById('add-anime-form');
-
         addAnimeForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
             const title = document.getElementById('new-anime-title').value;
             const episodeTitle = document.getElementById('new-episode-title').value;
-            const episodeId = document.getElementById('new-episode-id').value;
-            const videoUrl = document.getElementById('new-video-url').value;
+            const episodeUrl = document.getElementById('new-episode-url').value;
 
-            // Zbierz dane z formularza i wyślij je do serwera
-            fetch('/anime/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: title,
-                    episodeTitle: episodeTitle,
-                    episodeId: parseInt(episodeId),
-                    videoUrl: videoUrl
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    alert(data.message); // Wyświetl komunikat o sukcesie
-                    addAnimeForm.reset(); // Resetuj formularz
-                } else if (data.error) {
-                    alert(data.error); // Wyświetl komunikat o błędzie
-                }
-            })
-            .catch(error => {
-                console.error('Błąd:', error);
-                alert('Coś poszło nie tak!');
-            });
+            if (!title || !episodeTitle || !episodeUrl) {
+                alert("Wszystkie pola są wymagane!");
+                return;
+            }
+
+            const animeData = loadAnimeData();
+
+            // Jeżeli anime już istnieje, dodajemy odcinek
+            if (!animeData[title]) {
+                animeData[title] = {};
+            }
+
+            // Dodanie nowego odcinka
+            const episodeId = Object.keys(animeData[title]).length + 1;
+            animeData[title][episodeId] = episodeUrl;
+
+            saveAnimeData(animeData);
+
+            alert(`Dodano nowe anime: ${title} - Odcinek ${episodeTitle}`);
         });
     </script>
 </body>
