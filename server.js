@@ -17,6 +17,11 @@ const loadData = () => {
     return JSON.parse(rawData);
 };
 
+// Zapisywanie danych do pliku animeData.json
+const saveData = (data) => {
+    fs.writeFileSync(path.join(__dirname, 'animeData.json'), JSON.stringify(data, null, 2));
+};
+
 // Strona główna - lista anime
 app.get('/', (req, res) => {
     const animeData = loadData();
@@ -66,6 +71,33 @@ app.get('/anime/:title/episode/:id', (req, res) => {
     } else {
         res.status(404).send("Anime nie znaleziono");
     }
+});
+
+// API do dodawania odcinka
+app.post('/anime/add', (req, res) => {
+    const { title, episodeTitle, episodeId, videoUrl } = req.body;
+
+    if (!title || !episodeTitle || !episodeId || !videoUrl) {
+        return res.status(400).send('Wszystkie pola są wymagane');
+    }
+
+    const animeData = loadData();
+    const anime = animeData.find(a => a.title.toLowerCase() === title.toLowerCase());
+
+    if (!anime) {
+        return res.status(404).send('Anime nie znalezione');
+    }
+
+    const newEpisode = {
+        id: episodeId,
+        title: episodeTitle,
+        videoUrl: videoUrl
+    };
+
+    anime.episodes.push(newEpisode);
+    saveData(animeData);
+
+    res.send('Odcinek dodany pomyślnie');
 });
 
 // Uruchomienie serwera
