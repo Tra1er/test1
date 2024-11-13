@@ -28,11 +28,19 @@
 
             <button type="submit">Załaduj Odcinek</button>
         </form>
+
+        <!-- Formularz do dodania nowego anime -->
+        <h2>Dodaj nowe anime</h2>
+        <form id="add-anime-form">
+            <input type="text" id="new-anime-title" placeholder="Tytuł anime" required>
+            <input type="text" id="new-episode-title" placeholder="Tytuł odcinka" required>
+            <input type="number" id="new-episode-id" placeholder="ID odcinka" required>
+            <input type="url" id="new-video-url" placeholder="URL wideo" required>
+            <button type="submit">Dodaj Anime</button>
+        </form>
         
         <!-- Miejsce na iframe playera -->
-        <div id="player-container">
-            <!-- Tu załadowany będzie player -->
-        </div>
+        <div id="player-container"></div>
 
         <div id="error-message" class="error-message" style="display: none;">
             Odcinek lub anime nie zostały znalezione!
@@ -71,6 +79,45 @@
                 playerContainer.innerHTML = '';
                 errorMessage.style.display = 'block';
             }
+        });
+
+        // Obsługa formularza do dodawania anime
+        const addAnimeForm = document.getElementById('add-anime-form');
+
+        addAnimeForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const title = document.getElementById('new-anime-title').value;
+            const episodeTitle = document.getElementById('new-episode-title').value;
+            const episodeId = document.getElementById('new-episode-id').value;
+            const videoUrl = document.getElementById('new-video-url').value;
+
+            // Zbierz dane z formularza i wyślij je do serwera
+            fetch('/anime/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    episodeTitle: episodeTitle,
+                    episodeId: parseInt(episodeId),
+                    videoUrl: videoUrl
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message); // Wyświetl komunikat o sukcesie
+                    addAnimeForm.reset(); // Resetuj formularz
+                } else if (data.error) {
+                    alert(data.error); // Wyświetl komunikat o błędzie
+                }
+            })
+            .catch(error => {
+                console.error('Błąd:', error);
+                alert('Coś poszło nie tak!');
+            });
         });
     </script>
 </body>
