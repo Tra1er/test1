@@ -73,19 +73,19 @@ app.get('/anime/:title/episode/:id', (req, res) => {
     }
 });
 
-// API do dodawania odcinka
+// Endpoint do dodawania odcinków
 app.post('/anime/add', (req, res) => {
     const { title, episodeTitle, episodeId, videoUrl } = req.body;
 
     if (!title || !episodeTitle || !episodeId || !videoUrl) {
-        return res.status(400).send('Wszystkie pola są wymagane');
+        return res.status(400).json({ error: 'Wszystkie pola są wymagane' });
     }
 
     const animeData = loadData();
     const anime = animeData.find(a => a.title.toLowerCase() === title.toLowerCase());
 
     if (!anime) {
-        return res.status(404).send('Anime nie znalezione');
+        return res.status(404).json({ error: 'Anime nie znalezione' });
     }
 
     const newEpisode = {
@@ -97,7 +97,7 @@ app.post('/anime/add', (req, res) => {
     anime.episodes.push(newEpisode);
     saveData(animeData);
 
-    res.send('Odcinek dodany pomyślnie');
+    return res.status(200).json({ message: 'Odcinek dodany pomyślnie' });
 });
 
 // Uruchomienie serwera
