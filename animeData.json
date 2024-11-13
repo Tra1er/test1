@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Spy x Family",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Odcinek 1",
+                "videoUrl": "https://vidhidepre.com/embed/en6ij3y36jeh"
+            },
+            {
+                "id": 2,
+                "title": "Odcinek 2",
+                "videoUrl": "https://vidhidepre.com/embed/gddd7a6iilqh"
+            },
+            {
+                "id": 3,
+                "title": "Odcinek 3",
+                "videoUrl": "https://vidhidepre.com/embed/c6lqbi6jwjrf"
+            }
+        ]
+    }
+]
