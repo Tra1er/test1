@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "anime-stream-441610",
+  "private_key_id": "30ab4699ba8aabff4d245ce6f2ed7acac0c8a879",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDb4uwLvQe89RaX\nmtpiBz/jS79t8mUiKYTcAXgLkKDUgzeNCRmN233An4O7uJ6v3bvN4/Fg6doIMQEH\nzLM+iy9A+KMC28EUyOoVdGIH7wwQ9uzcL72RS77z7N6+iFDwEzIHiu0ApCFUvM8F\nV7d4HAqJx5CJQDOM4NX2NdxFpts9tz3tOHrCrQq0qQJaR/5Jp+BskCWAJvU6X3gS\nqJoTEQjApiMlEZEJ7E6a0jFVY6YPU239Xv0Evj6Y8CbmLedHGjfwFVi2wQuoFYtP\n0IEhaQmmchLPhGQT4RJMKLdZeqxAb+5rHOwS4FUn58QfpO1xMdkoaTHj2qQZt6e3\nvEjTunUlAgMBAAECggEAIWBNs49vGgG6uurkrJ4MlsgD5+Cz9K5ILivj6J98ph0/\nxJ7lu9hd+2vLD2a74ZZ+4AbyN+NvNrCXhzNNXtg6JTrIZZHtOiYwD+8hRTKGCpos\nhFSTyfbtJnHlMpcW8AX94VK3XFJNg+L/6n/wx6C8AcNiv06ZNJBZMdzlkUX9P93l\nLtwvQ1PosDWFmihRf31ngyW0puVxkYpvXSnRCJQGHX531j96Wo8MpbQNLmrVyMI7\ntnWAT8G6Zuoo+3pfqLcMR7fW233FT4GFIp2WXThs6h34z9GMVw2Wn5iiy81I1flA\nZKqJL8yBpasPccsPdqVdYNxJ3XDxZCM9nhlWt/TB6QKBgQD9ncRrKFf5UzivJsVh\nbkKPksnoplHnMzRYN6OKWKxid7Ri5Yp0pGKeVfywCmkmJA8YXsXUHYo3p3ms5m4E\nz8CF8OHFYyYUROi78x7Yp3bgGmGVWDe9zOEh3kHx1RMyCWb08Lszzc9gL9kTKayf\navYVl5UtKGS2arl6uMWV3gCCHQKBgQDd8/8Z4ITELJgVStctuKMwFuG1PZOZn/+4\nIv6SP+OjQRY1S7loBDMhvrNsN5f2s1A2Lg/5qtXpf9MB6XrmXn+YieTveshi58HF\nMy22LApPhGlNMzJe3JH/PBeXtHyqi0mVld4x20RTBHtW2VPNsbM98lTvl4iq3k8I\nhyUnitHQqQKBgQDZnIqRy68YrrC/kQvhmsMgADqhFjzGnaf3Xd5EceuQHdg4124i\nwX4hD/TedEBeyqftKDyk0afsMxZzJdEW7c/q3ZJLVNSypaHwyx4XljGo/tnmVCiY\nAfjWn6eDwmlTEMA3wWtPevPKO6QODj8hFp0KT+NfOP6Zix+VTn+zJSbYfQKBgGuN\nCWdzqUIaTdO7gUuRddoerF6TqQs/Qb3rjyo1NUxthKJswDoMFu7aJr1grw2HVG38\nohccVi2gmBIMHla1IeU7pKj6+VEb9oRlSVhGPPTNN+2Fynm3LjPc3Z3QgrxtZEnM\n5m+ITbJgsJekFfzNiAqTe97hsgMCWI/MVQ+1L/iJAoGAH/yk40iJIrAk0YDft/Zo\nzMwymTInCjpFLQrR4v+4qKzhmIISORf2f6qD8BwSP/Gb0OcSw/e7srxedjRYxJ6+\n3kSn2VimDx+EI2NylaA2ku1q9gwJfDLJAR/iqWyzjodZdKN4yqDkHedhsAKAS9Es\nM1Yj1bOBu3ldwHI+KE6AwRw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "anime-api-service@anime-stream-441610.iam.gserviceaccount.com",
+  "client_id": "116085324300623995969",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/anime-api-service%40anime-stream-441610.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
