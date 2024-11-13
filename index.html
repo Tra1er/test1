@@ -28,16 +28,7 @@
 
             <button type="submit">Załaduj Odcinek</button>
         </form>
-
-        <h1>Dodaj Nowy Odcinek</h1>
-        <form id="add-episode-form">
-            <input type="text" id="anime-title" placeholder="Tytuł Anime" required>
-            <input type="text" id="episode-title" placeholder="Tytuł Odcinka" required>
-            <input type="number" id="episode-id" placeholder="Numer Odcinka" required>
-            <input type="url" id="video-url" placeholder="Link do Video" required>
-            <button type="submit">Dodaj Odcinek</button>
-        </form>
-
+        
         <!-- Miejsce na iframe playera -->
         <div id="player-container">
             <!-- Tu załadowany będzie player -->
@@ -52,7 +43,6 @@
         const form = document.getElementById('anime-form');
         const playerContainer = document.getElementById('player-container');
         const errorMessage = document.getElementById('error-message');
-        const addEpisodeForm = document.getElementById('add-episode-form');
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -73,7 +63,7 @@
 
             // Sprawdzenie, czy odcinek istnieje
             if (episodes[anime] && episodes[anime][episode]) {
-                playerContainer.innerHTML = `
+                playerContainer.innerHTML = `  
                     <iframe src="${episodes[anime][episode]}" frameborder="0" allowfullscreen></iframe>
                 `;
                 errorMessage.style.display = 'none';
@@ -81,38 +71,6 @@
                 playerContainer.innerHTML = '';
                 errorMessage.style.display = 'block';
             }
-        });
-
-        addEpisodeForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const title = document.getElementById('anime-title').value;
-            const episodeTitle = document.getElementById('episode-title').value;
-            const episodeId = document.getElementById('episode-id').value;
-            const videoUrl = document.getElementById('video-url').value;
-
-            const data = {
-                title: title,
-                episodeTitle: episodeTitle,
-                episodeId: parseInt(episodeId),
-                videoUrl: videoUrl
-            };
-
-            fetch('/anime/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Odcinek dodany pomyślnie!');
-                addEpisodeForm.reset();
-            })
-            .catch(error => {
-                alert('Błąd: ' + error.message);
-            });
         });
     </script>
 </body>
