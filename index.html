@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Streamer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Streamer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Anime Streamer</h1>
-        <p>Wybierz swoje ulubione anime i odcinek</p>
+  <div class="container">
+    <header>
+      <h1>Anime Streamer</h1>
+      <p>Wybierz swoje ulubione anime i odcinek</p>
+    </header>
 
-        <div class="anime-selection">
-            <label for="anime-select">Lista Anime:</label>
-            <select id="anime-select">
-                <option value="0">Spy x Family</option>
-            </select>
-        </div>
-
-        <div class="episode-selection">
-            <label for="episode-select">Wybierz Odcinek:</label>
-            <select id="episode-select">
-                <option value="0">Odcinek 1</option>
-                <option value="1">Odcinek 2</option>
-            </select>
-        </div>
-
-        <div class="player-selection">
-            <label for="player-select">Wybierz Odtwarzacz:</label>
-            <select id="player-select">
-                <option value="https://vidhidepre.com/embed/en6ij3y36jeh">Player 1</option>
-                <option value="https://listeamed.net/e/8ozgENLQAN65mjA">Player 2</option>
-            </select>
-        </div>
-
-        <div id="player-container">
-            <iframe src="https://vidhidepre.com/embed/en6ij3y36jeh" frameborder="0" allowfullscreen></iframe>
-        </div>
+    <div class="anime-selector">
+      <label for="anime">Wybierz Anime:</label>
+      <select id="anime">
+        <option value="">Wybierz anime</option>
+        <option value="Spy x Family">Spy x Family</option>
+      </select>
     </div>
 
-    <script src="script.js"></script>
+    <div class="episode-selector" style="display: none;">
+      <label for="episode">Wybierz Odcinek:</label>
+      <select id="episode">
+        <!-- Odcinki będą ładowane dynamicznie -->
+      </select>
+    </div>
+
+    <div class="player-selector" style="display: none;">
+      <label for="player">Wybierz Player:</label>
+      <select id="player">
+        <!-- Playerzy będą ładowani dynamicznie -->
+      </select>
+    </div>
+
+    <div class="player-container" style="display: none;">
+      <iframe id="video-player" width="800" height="450" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
