@@ -1,6 +1,6 @@
 const animeData = {
   "Spy x Family": {
-    description: "Historia o rodzinie szpiegów, którzy muszą współpracować, aby przejść przez życie w tajemnicy.",
+    description: "Historia o rodzinie szpiegów, którzy muszą współpracować, aby przejść przez życie w tajemnicy. Anya, Loid i Yor tworzą niesamowitą i pełną zabawnych sytuacji rodzinę.",
     episodes: [
       { episode: 1, players: [{ name: "VidHide", url: "https://vidhidepre.com/embed/en6ij3y36jeh.html" }, { name: "VidGuard", url: "https://listeamed.net/e/8ozgENLQAN65mjA" }] },
       { episode: 2, players: [{ name: "VidHide", url: "https://vidhidepre.com/embed/gddd7a6iilqh.html" }, { name: "VidGuard", url: "https://listeamed.net/e/k3gG5q3lnRjE1N2" }] },
@@ -22,9 +22,9 @@ document.getElementById("spy-family").addEventListener("click", function () {
   const animeName = "Spy x Family";
   const animeDescription = animeData[animeName].description;
   const episodeSelector = document.querySelector(".episode-selector");
-  const content = document.querySelector(".content");
+  const animePage = document.getElementById("anime-page");
 
-  // Tworzenie struktury HTML dla opisu i odcinków
+  // Pokazujemy stronę z opisem i wyborem odcinków
   document.querySelector(".anime-description").innerHTML = `
     <h2>${animeName}</h2>
     <p>${animeDescription}</p>
@@ -43,7 +43,7 @@ document.getElementById("spy-family").addEventListener("click", function () {
       // Dodaj przyciski dla playerów
       episode.players.forEach(player => {
         const playerButton = document.createElement("button");
-        playerButton.textContent = `Player: ${player.name}`;
+        playerButton.textContent = player.name;
         playerButton.addEventListener("click", function () {
           document.getElementById("video-player").src = player.url;
           document.querySelector(".player-container").style.display = "block";
@@ -53,8 +53,10 @@ document.getElementById("spy-family").addEventListener("click", function () {
 
       playerSelector.style.display = "flex";
     });
+
     episodeSelector.appendChild(button);
   });
 
-  content.style.display = "block";
+  animePage.style.display = "block"; // Pokaż stronę z opisem i odcinkami
+  document.getElementById("main-content").style.display = "none"; // Ukryj stronę główną
 });
