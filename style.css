@@ -13,7 +13,6 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    overflow: hidden;
 }
 
 .container {
@@ -24,9 +23,6 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.5s ease;
 }
 
 h1 {
@@ -39,12 +35,6 @@ p {
     margin-bottom: 20px;
 }
 
-label {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    display: block;
-}
-
 select {
     width: 80%;
     padding: 10px;
@@ -52,25 +42,6 @@ select {
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    transition: all 0.3s ease;
-}
-
-select:focus {
-    border-color: #007BFF;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-select,
-#player-container {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s ease;
-}
-
-select.active,
-#player-container.active {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 #player-container iframe {
