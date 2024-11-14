@@ -2,19 +2,31 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Anime Streamer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="main-content">
-        <h1>Witamy w Anime Streamer</h1>
-        <p>Wybierz swoje ulubione anime i zacznij oglądać odcinki!</p>
-        <button id="start-button">Zacznij</button>
+    <div id="main-page">
+        <h1>Witaj na Anime Streamer!</h1>
+        <button id="start-btn">Zacznij</button>
     </div>
-    <script>
-        document.getElementById("start-button").addEventListener("click", () => {
-            window.location.href = "anime.html";
-        });
-    </script>
+
+    <div id="anime-page" style="display: none;">
+        <h2 id="anime-title"></h2>
+        <p id="anime-description"></p>
+
+        <h3>Wybierz odcinek</h3>
+        <ul id="episode-list"></ul>
+
+        <div id="player-selection" style="display: none;">
+            <h3>Wybierz playera</h3>
+            <button id="vidhide-player">VidHide</button>
+            <button id="vidguard-player">VidGuard</button>
+        </div>
+    </div>
+
+    <script src="animeData.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
