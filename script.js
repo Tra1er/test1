@@ -1,52 +1,69 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const animeList = document.getElementById("anime-list");
-  const episodeList = document.getElementById("episode-list");
-  const playerList = document.getElementById("player-list");
-  const videoContainer = document.getElementById("video-container");
+// script.js
 
-  function loadAnimeList() {
-    fetch("animeData.json")
-      .then(response => response.json())
-      .then(data => {
-        data.animes.forEach(anime => {
-          const animeButton = document.createElement("button");
-          animeButton.textContent = anime.title;
-          animeButton.addEventListener("click", () => {
-            history.pushState({ page: "episodes" }, "", "#episodes");
-            showAnimeEpisodes(anime);
-          });
-          animeList.appendChild(animeButton);
-        });
-      });
-  }
+document.addEventListener("DOMContentLoaded", () => {
+    const startButton = document.getElementById("start-button");
+    const mainContent = document.getElementById("main-content");
 
-  function showAnimeEpisodes(anime) {
-    animeList.style.display = "none";
-    episodeList.innerHTML = `<h2>${anime.title}</h2><p>${anime.description}</p>`;
-    anime.episodes.forEach(episode => {
-      const episodeButton = document.createElement("button");
-      episodeButton.textContent = `Odcinek ${episode.episodeNumber}`;
-      episodeButton.addEventListener("click", () => {
-        showPlayerOptions(episode.players);
-      });
-      episodeList.appendChild(episodeButton);
+    startButton.addEventListener("click", () => {
+        window.location.hash = "anime-list";
+        showAnimeList();
     });
-    episodeList.style.display = "block";
-  }
 
-  function showPlayerOptions(players) {
-    playerList.innerHTML = "";
-    playerList.style.display = "block";
-    for (const [playerName, url] of Object.entries(players)) {
-      const playerButton = document.createElement("button");
-      playerButton.textContent = playerName;
-      playerButton.addEventListener("click", () => {
-        videoContainer.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
-      });
-      playerList.appendChild(playerButton);
+    function showAnimeList() {
+        mainContent.innerHTML = "<h2>Wybierz Anime</h2><ul>";
+        animeData.anime.forEach((anime, index) => {
+            mainContent.innerHTML += `<li><button class="anime-button" data-index="${index}">${anime.title}</button></li>`;
+        });
+        mainContent.innerHTML += "</ul>";
+
+        document.querySelectorAll(".anime-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const animeIndex = event.target.getAttribute("data-index");
+                showEpisodes(animeIndex);
+            });
+        });
     }
-    videoContainer.style.display = "block";
-  }
 
-  loadAnimeList();
+    function showEpisodes(animeIndex) {
+        const anime = animeData.anime[animeIndex];
+        mainContent.innerHTML = `<h2>${anime.title}</h2><p>${anime.description}</p><ul>`;
+        anime.episodes.forEach((episode) => {
+            mainContent.innerHTML += `<li><button class="episode-button" data-episode="${episode.episodeNumber}">Odcinek ${episode.episodeNumber}</button></li>`;
+        });
+        mainContent.innerHTML += "</ul>";
+
+        document.querySelectorAll(".episode-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const episodeNumber = event.target.getAttribute("data-episode");
+                showPlayerOptions(animeIndex, episodeNumber);
+            });
+        });
+    }
+
+    function showPlayerOptions(animeIndex, episodeNumber) {
+        const anime = animeData.anime[animeIndex];
+        const episode = anime.episodes.find(ep => ep.episodeNumber == episodeNumber);
+
+        mainContent.innerHTML = `
+            <h2>Odcinek ${episodeNumber} - ${anime.title}</h2>
+            <div id="player-container">
+                <p>Wybierz player:</p>
+                <button class="player-button" data-url="${episode.vidHide}">VidHide</button>
+                <button class="player-button" data-url="${episode.vidGuard}">VidGuard</button>
+            </div>
+            <div id="video-frame"></div>
+        `;
+
+        document.querySelectorAll(".player-button").forEach(button => {
+            button.addEventListener("click", (event) => {
+                const playerUrl = event.target.getAttribute("data-url");
+                document.getElementById("video-frame").innerHTML = `<iframe src="${playerUrl}" width="800" height="450" frameborder="0" allowfullscreen></iframe>`;
+            });
+        });
+    }
+
+    // Wywołanie funkcji początkowej, jeśli jest hash w URL
+    if (window.location.hash === "#anime-list") {
+        showAnimeList();
+    }
 });
