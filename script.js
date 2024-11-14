@@ -18,28 +18,17 @@ const animeData = {
   }
 };
 
-window.addEventListener("hashchange", function () {
-  const currentHash = window.location.hash.substring(1);
-  if (currentHash === "anime-page") {
-    document.getElementById("main-content").style.display = "none";
-    document.getElementById("anime-page").style.display = "block";
-  } else {
-    document.getElementById("main-content").style.display = "block";
-    document.getElementById("anime-page").style.display = "none";
-  }
-});
 
-document.getElementById("spy-family").addEventListener("click", function () {
-  window.location.hash = "anime-page";
-  showAnimePage("Spy x Family");
-});
-
-function showAnimePage(animeName) {
+function loadAnimePage(animeName) {
   const anime = animeData[animeName];
-  document.querySelector(".anime-description").textContent = anime.description;
 
+  // Aktualizuj tytuł i opis anime
+  document.getElementById("anime-title").textContent = animeName;
+  document.getElementById("anime-description").textContent = anime.description;
+
+  // Wyczyść i dodaj przyciski odcinków
   const episodeSelector = document.querySelector(".episode-selector");
-  episodeSelector.innerHTML = ""; // Clear previous episode buttons
+  episodeSelector.innerHTML = ""; // Wyczyść poprzednie przyciski
   anime.episodes.forEach((episode) => {
     const episodeButton = document.createElement("button");
     episodeButton.textContent = `Odcinek ${episode.episode}`;
@@ -48,14 +37,18 @@ function showAnimePage(animeName) {
     });
     episodeSelector.appendChild(episodeButton);
   });
+
+  // Pokaż widok szczegółów anime i ukryj listę
+  document.getElementById("anime-list-view").style.display = "none";
+  document.getElementById("anime-detail-view").style.display = "block";
 }
 
 function loadPlayer(episode) {
   const videoPlayer = document.getElementById("video-player");
   const playerSelector = document.querySelector(".player-selector");
 
-  videoPlayer.src = episode.players[0].url; // Set default player
-  playerSelector.innerHTML = ""; // Clear previous player buttons
+  videoPlayer.src = episode.players[0].url; // Ustaw domyślny player
+  playerSelector.innerHTML = ""; // Wyczyść poprzednie przyciski
 
   episode.players.forEach((player) => {
     const playerButton = document.createElement("button");
@@ -68,4 +61,10 @@ function loadPlayer(episode) {
 
   document.querySelector(".player-container").style.display = "block";
   playerSelector.style.display = "flex";
+}
+
+function goBackToAnimeList() {
+  // Powrót do listy anime
+  document.getElementById("anime-list-view").style.display = "block";
+  document.getElementById("anime-detail-view").style.display = "none";
 }
