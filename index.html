@@ -26,7 +26,8 @@
             .then(response => response.json())
             .then(data => {
                 const animeListDiv = document.getElementById('anime-list');
-                data.forEach(anime => {
+
+                data.anime.forEach(anime => {
                     const animeItem = document.createElement('div');
                     animeItem.classList.add('anime-item');
                     animeItem.innerHTML = `
@@ -34,7 +35,12 @@
                         <ul>
                             ${anime.episodes.map(episode => `
                                 <li>
-                                    <a href="${episode.link}" target="_blank">${episode.title}</a>
+                                    <strong>Odcinek ${episode.episode}</strong>
+                                    <ul>
+                                        ${episode.players.map(player => `
+                                            <li><a href="${player.url}" target="_blank">${player.name}</a></li>
+                                        `).join('')}
+                                    </ul>
                                 </li>
                             `).join('')}
                         </ul>
