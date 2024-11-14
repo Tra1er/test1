@@ -3,34 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Streamer - Spy x Family</title>
+    <title>Anime Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-        <h1>Spy x Family</h1>
-        <p>Wybierz odcinek do obejrzenia:</p>
-    </header>
-
-    <main>
-        <div class="episode-list">
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=1'">Odcinek 1</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=2'">Odcinek 2</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=3'">Odcinek 3</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=4'">Odcinek 4</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=5'">Odcinek 5</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=6'">Odcinek 6</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=7'">Odcinek 7</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=8'">Odcinek 8</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=9'">Odcinek 9</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=10'">Odcinek 10</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=11'">Odcinek 11</button>
-            <button class="episode-button" onclick="window.location.href='anime.html?episode=12'">Odcinek 12</button>
+<body class="dark-theme">
+    <div class="container">
+        <h1>Wybierz Anime</h1>
+        <div class="anime-list">
+            <div class="anime-item">
+                <a href="episodes.html?anime=SpyXFamily">
+                    <img src="spyxfamily.jpg" alt="Spy x Family">
+                    <h2>Spy x Family</h2>
+                    <p>Opis anime...</p>
+                    <p>Ocena: 8.5</p>
+                </a>
+            </div>
+            <!-- Dodaj inne anime tutaj -->
         </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Anime Streamer</p>
-    </footer>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
