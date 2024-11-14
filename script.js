@@ -90,6 +90,7 @@ const animeList = [
   }
 ];
 
+
 // Funkcja do generowania opcji dla wyboru anime
 function populateAnimeSelect() {
   const animeSelect = document.getElementById("anime-select");
@@ -104,7 +105,7 @@ function populateAnimeSelect() {
 // Funkcja do generowania opcji dla wyboru odcinka
 function populateEpisodeSelect(animeIndex) {
   const episodeSelect = document.getElementById("episode-select");
-  episodeSelect.innerHTML = ""; // Wyczyść poprzednie opcje
+  episodeSelect.innerHTML = "";
 
   const anime = animeList[animeIndex];
   anime.episodes.forEach((episode, index) => {
@@ -118,7 +119,7 @@ function populateEpisodeSelect(animeIndex) {
 // Funkcja do generowania opcji dla wyboru playera
 function populatePlayerSelect(animeIndex, episodeIndex) {
   const playerSelect = document.getElementById("player-select");
-  playerSelect.innerHTML = ""; // Wyczyść poprzednie opcje
+  playerSelect.innerHTML = "";
 
   const episode = animeList[animeIndex].episodes[episodeIndex];
   episode.players.forEach(player => {
@@ -141,11 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Wypełnij listę anime
   populateAnimeSelect();
 
+  // Po załadowaniu strony, animujemy całą stronę
+  document.querySelector(".container").classList.add("active");
+
   // Obsługuje zmianę wyboru anime
   document.getElementById("anime-select").addEventListener("change", (event) => {
     const animeIndex = event.target.value;
     populateEpisodeSelect(animeIndex);
-    populatePlayerSelect(animeIndex, 0); // Domyślnie wybieramy pierwszy odcinek
+    populatePlayerSelect(animeIndex, 0); 
     document.querySelector('.episode-selection').classList.add('active');
   });
 
@@ -165,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePlayer(animeIndex, episodeIndex, playerUrl);
   });
 
-  // Ustawienia początkowe (domyślny wybór pierwszego anime, odcinka i playera)
+  // Domyślnie ustawiamy odcinek i playera
   populateEpisodeSelect(0);
   populatePlayerSelect(0, 0);
   updatePlayer(0, 0, animeList[0].episodes[0].players[0].url);
