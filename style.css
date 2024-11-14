@@ -1,96 +1,70 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #1c1c1c;
-  color: #f5f5f5;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e2e;
+    color: #e0e0f0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-header {
-  text-align: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
+.title {
+    font-size: 3em;
+    margin: 20px 0;
+    color: #ffc107;
 }
 
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
+.welcome {
+    font-size: 1.5em;
+    margin: 10px;
 }
 
-p {
-  font-size: 1.2em;
+.description {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #b0b0c0;
 }
 
-.anime-list {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.start-button {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    margin: 20px;
+    background-color: #ff5c5c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.anime-button {
-  background-color: #444;
-  color: #fff;
-  padding: 15px 25px;
-  margin: 10px;
-  text-decoration: none;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.start-button:hover {
+    background-color: #e04e4e;
 }
 
-.anime-button:hover {
-  background-color: #666;
+#anime-list {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+    transition: opacity 0.5s;
 }
 
-.anime-page {
-  text-align: center;
-  margin-top: 40px;
+.hidden {
+    display: none;
 }
 
-.anime-description {
-  font-size: 1.4em;
-  margin-bottom: 20px;
-  line-height: 1.6em;
+button.anime-button {
+    background-color: #333;
+    color: #ffc107;
+    padding: 15px;
+    font-size: 1.1em;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.episode-selector {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.episode-selector button {
-  background-color: #444;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-}
-
-.episode-selector button:hover {
-  background-color: #666;
-}
-
-.player-container {
-  margin-top: 20px;
-}
-
-.player-selector button {
-  background-color: #444;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-}
-
-.player-selector button:hover {
-  background-color: #666;
+button.anime-button:hover {
+    transform: scale(1.1);
 }
