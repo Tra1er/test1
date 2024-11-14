@@ -17,58 +17,51 @@ const animeData = {
   }
 };
 
-document.getElementById("anime").addEventListener("change", function () {
-  const animeName = this.value;
-  const episodeSelector = document.getElementById("episode");
-  const playerSelector = document.getElementById("player");
-  const playerContainer = document.querySelector(".player-container");
+document.getElementById("choose-anime").addEventListener("click", function () {
+  const animeName = "Spy x Family"; // Na razie wybraliśmy jedno anime statycznie
+  const episodeSelector = document.querySelector(".episode-selector");
+  const playerSelector = document.querySelector(".player-selector");
   
-  if (animeName) {
-    const episodes = animeData[animeName].episodes;
-    
-    episodeSelector.innerHTML = '<option value="">Wybierz odcinek</option>';
-    episodes.forEach(episode => {
-      const option = document.createElement("option");
-      option.value = episode.episode;
-      option.textContent = `Odcinek ${episode.episode}`;
-      episodeSelector.appendChild(option);
+  const episodes = animeData[animeName].episodes;
+
+  episodeSelector.style.display = "block";
+  episodeSelector.innerHTML = '<button id="choose-episode">Wybierz Odcinek</button>';
+
+  document.getElementById("choose-episode").addEventListener("click", function () {
+    const episodeButtons = episodes.map(episode => {
+      const button = document.createElement("button");
+      button.textContent = `Odcinek ${episode.episode}`;
+      button.onclick = function () {
+        loadPlayers(episode.episode);
+      };
+      return button;
     });
 
-    document.querySelector(".episode-selector").style.display = "block";
-    playerSelector.innerHTML = '<option value="">Wybierz playera</option>';
-    playerSelector.disabled = true;
-    playerContainer.style.display = "none";
-  }
+    episodeSelector.innerHTML = "";
+    episodeButtons.forEach(button => episodeSelector.appendChild(button));
+  });
 });
 
-document.getElementById("episode").addEventListener("change", function () {
-  const animeName = document.getElementById("anime").value;
-  const episodeNumber = this.value;
-  const playerSelector = document.getElementById("player");
-  const playerContainer = document.querySelector(".player-container");
-  
-  if (animeName && episodeNumber) {
-    const episode = animeData[animeName].episodes.find(e => e.episode == episodeNumber);
-    
-    playerSelector.innerHTML = '<option value="">Wybierz playera</option>';
-    episode.players.forEach(player => {
-      const option = document.createElement("option");
-      option.value = player.url;
-      option.textContent = player.name;
-      playerSelector.appendChild(option);
+function loadPlayers(episodeNumber) {
+  const animeName = "Spy x Family";
+  const episode = animeData[animeName].episodes.find(e => e.episode === episodeNumber);
+  const playerSelector = document.querySelector(".player-selector");
+
+  playerSelector.style.display = "block";
+  playerSelector.innerHTML = '<button id="choose-player">Wybierz Player</button>';
+
+  document.getElementById("choose-player").addEventListener("click", function () {
+    const playerButtons = episode.players.map(player => {
+      const button = document.createElement("button");
+      button.textContent = player.name;
+      button.onclick = function () {
+        document.getElementById("video-player").src = player.url;
+        document.querySelector(".player-container").style.display = "block";
+      };
+      return button;
     });
 
-    playerSelector.disabled = false;
-    document.querySelector(".player-selector").style.display = "block";
-  }
-});
-
-document.getElementById("player").addEventListener("change", function () {
-  const playerUrl = this.value;
-  const videoPlayer = document.getElementById("video-player");
-  
-  if (playerUrl) {
-    videoPlayer.src = playerUrl;
-    document.querySelector(".player-container").style.display = "block";
-  }
-});
+    playerSelector.innerHTML = "";
+    playerButtons.forEach(button => playerSelector.appendChild(button));
+  });
+}
