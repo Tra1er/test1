@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Streaming</title>
+    <title>Anime Streamer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="main-page">
-        <h1>Witaj na Anime Streamer!</h1>
-        <button id="start-btn">Zacznij</button>
+    <header>
+        <h1>Anime Streamer</h1>
+        <p>Wybierz swoje ulubione anime i zacznij oglądać odcinki!</p>
+    </header>
 
-        <div id="anime-list">
-            <h2>Wybierz anime</h2>
-            <ul id="anime-items">
-                <!-- Tutaj będą wyświetlane anime -->
-            </ul>
+    <main>
+        <div class="anime-list">
+            <div class="anime-card" id="spyxfamily">
+                <h2>Spy x Family</h2>
+                <p>Spy x Family to historia agenta wywiadu, który musi udawać szczęśliwego ojca, aby wykonać misję. Wkrótce zostaje zaskoczony przez swoje "rodzinne" życie.</p>
+                <p><strong>Ocena:</strong> 8.5/10 - <a href="https://myanimelist.net/anime/12234/Spy_x_Family" target="_blank">MyAnimeList</a></p>
+            </div>
         </div>
-    </div>
+        <button id="start">Zacznij oglądać</button>
+    </main>
 
-    <script src="animeData.js"></script>
-    <script src="index.js"></script>
+    <footer>
+        <p>&copy; 2024 Anime Streamer</p>
+    </footer>
+
+    <script src="episode.js"></script>
 </body>
 </html>
