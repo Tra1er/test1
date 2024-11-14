@@ -18,45 +18,54 @@ const animeData = {
   }
 };
 
+window.addEventListener("hashchange", function () {
+  const currentHash = window.location.hash.substring(1);
+  if (currentHash === "anime-page") {
+    document.getElementById("main-content").style.display = "none";
+    document.getElementById("anime-page").style.display = "block";
+  } else {
+    document.getElementById("main-content").style.display = "block";
+    document.getElementById("anime-page").style.display = "none";
+  }
+});
+
 document.getElementById("spy-family").addEventListener("click", function () {
-  const animeName = "Spy x Family";
-  const animeDescription = animeData[animeName].description;
+  window.location.hash = "anime-page";
+  showAnimePage("Spy x Family");
+});
+
+function showAnimePage(animeName) {
+  const anime = animeData[animeName];
+  document.querySelector(".anime-description").textContent = anime.description;
+
   const episodeSelector = document.querySelector(".episode-selector");
-  const animePage = document.getElementById("anime-page");
-
-  // Pokazujemy stronę z opisem i wyborem odcinków
-  document.querySelector(".anime-description").innerHTML = `
-    <h2>${animeName}</h2>
-    <p>${animeDescription}</p>
-  `;
-  
-  episodeSelector.innerHTML = "";  // Wyczyść poprzednie przyciski
-
-  // Dodaj przyciski dla odcinków
-  animeData[animeName].episodes.forEach(episode => {
-    const button = document.createElement("button");
-    button.textContent = `Odcinek ${episode.episode}`;
-    button.addEventListener("click", function () {
-      const playerSelector = document.querySelector(".player-selector");
-      playerSelector.innerHTML = ""; // Wyczyść poprzednie przyciski
-
-      // Dodaj przyciski dla playerów
-      episode.players.forEach(player => {
-        const playerButton = document.createElement("button");
-        playerButton.textContent = player.name;
-        playerButton.addEventListener("click", function () {
-          document.getElementById("video-player").src = player.url;
-          document.querySelector(".player-container").style.display = "block";
-        });
-        playerSelector.appendChild(playerButton);
-      });
-
-      playerSelector.style.display = "flex";
+  episodeSelector.innerHTML = ""; // Clear previous episode buttons
+  anime.episodes.forEach((episode) => {
+    const episodeButton = document.createElement("button");
+    episodeButton.textContent = `Odcinek ${episode.episode}`;
+    episodeButton.addEventListener("click", function () {
+      loadPlayer(episode);
     });
+    episodeSelector.appendChild(episodeButton);
+  });
+}
 
-    episodeSelector.appendChild(button);
+function loadPlayer(episode) {
+  const videoPlayer = document.getElementById("video-player");
+  const playerSelector = document.querySelector(".player-selector");
+
+  videoPlayer.src = episode.players[0].url; // Set default player
+  playerSelector.innerHTML = ""; // Clear previous player buttons
+
+  episode.players.forEach((player) => {
+    const playerButton = document.createElement("button");
+    playerButton.textContent = player.name;
+    playerButton.addEventListener("click", function () {
+      videoPlayer.src = player.url;
+    });
+    playerSelector.appendChild(playerButton);
   });
 
-  animePage.style.display = "block"; // Pokaż stronę z opisem i odcinkami
-  document.getElementById("main-content").style.display = "none"; // Ukryj stronę główną
-});
+  document.querySelector(".player-container").style.display = "block";
+  playerSelector.style.display = "flex";
+}
