@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anime Streamer</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Streamer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Anime Streamer</h1>
-      <p>Wybierz swoje ulubione anime i odcinek</p>
-    </header>
+    <div class="container">
+        <h1>Anime Streamer</h1>
+        <p>Wybierz swoje ulubione anime i odcinek</p>
 
-    <section class="anime-list">
-      <h2>Lista Anime</h2>
-      <ul id="anime-list"></ul>
-    </section>
+        <!-- Lista Anime -->
+        <div>
+            <label for="anime-select">Lista Anime:</label>
+            <select id="anime-select">
+                <!-- Opcje będą generowane dynamicznie -->
+            </select>
+        </div>
 
-    <section class="video-player">
-      <h2>Odtwarzacz Wideo</h2>
-      <div id="player-container"></div>
-    </section>
-  </div>
+        <!-- Lista Odcinków -->
+        <div>
+            <label for="episode-select">Odcinek:</label>
+            <select id="episode-select">
+                <!-- Opcje będą generowane dynamicznie -->
+            </select>
+        </div>
 
-  <script src="script.js"></script>
+        <!-- Wybór playera -->
+        <div>
+            <label for="player-select">Odtwarzacz:</label>
+            <select id="player-select">
+                <!-- Opcje będą generowane dynamicznie -->
+            </select>
+        </div>
+
+        <!-- Odtwarzacz wideo -->
+        <div id="player-container">
+            <!-- Odtwarzacz będzie wyświetlany tutaj -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
