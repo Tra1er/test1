@@ -90,29 +90,82 @@ const animeList = [
   }
 ];
 
-// Funkcja, która generuje HTML dla danego anime
-function renderAnime(anime) {
-  let animeHtml = `<h1>${anime.title}</h1><div class="episodes">`;
-
-  anime.episodes.forEach(episode => {
-    animeHtml += `<div class="episode">
-      <h2>Odcinek ${episode.episode}</h2>
-      <div class="players">`;
-
-    episode.players.forEach(player => {
-      animeHtml += `<div class="player">
-        <h3>${player.name}</h3>
-        <iframe src="${player.url}" frameborder="0" allowfullscreen></iframe>
-      </div>`;
-    });
-
-    animeHtml += `</div></div>`;
+// Funkcja do generowania opcji dla wyboru anime
+function populateAnimeSelect() {
+  const animeSelect = document.getElementById("anime-select");
+  animeList.forEach((anime, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = anime.title;
+    animeSelect.appendChild(option);
   });
-
-  animeHtml += `</div>`;
-  return animeHtml;
 }
 
-// Wyświetlanie wszystkich anime na stronie
-document.getElementById('anime-container').innerHTML = renderAnime(animeList[0]);
+// Funkcja do generowania opcji dla wyboru odcinka
+function populateEpisodeSelect(animeIndex) {
+  const episodeSelect = document.getElementById("episode-select");
+  episodeSelect.innerHTML = ""; // Wyczyść poprzednie opcje
 
+  const anime = animeList[animeIndex];
+  anime.episodes.forEach((episode, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = `Odcinek ${episode.episode}`;
+    episodeSelect.appendChild(option);
+  });
+}
+
+// Funkcja do generowania opcji dla wyboru playera
+function populatePlayerSelect(animeIndex, episodeIndex) {
+  const playerSelect = document.getElementById("player-select");
+  playerSelect.innerHTML = ""; // Wyczyść poprzednie opcje
+
+  const episode = animeList[animeIndex].episodes[episodeIndex];
+  episode.players.forEach(player => {
+    const option = document.createElement("option");
+    option.value = player.url;
+    option.textContent = player.name;
+    playerSelect.appendChild(option);
+  });
+}
+
+// Funkcja do wyświetlania odtwarzacza wideo
+function updatePlayer(animeIndex, episodeIndex, playerUrl) {
+  const playerContainer = document.getElementById("player-container");
+  playerContainer.innerHTML = `<iframe src="${playerUrl}" frameborder="0" allowfullscreen></iframe>`;
+}
+
+// Inicjalizacja strony
+document.addEventListener("DOMContentLoaded", () => {
+  // Wypełnij listę anime
+  populateAnimeSelect();
+
+  // Obsługuje zmianę wyboru anime
+  document.getElementById("anime-select").addEventListener("change", (event) => {
+    const animeIndex = event.target.value;
+    populateEpisodeSelect(animeIndex);
+    populatePlayerSelect(animeIndex, 0); // Domyślnie wybieramy pierwszy odcinek
+    updatePlayer(animeIndex, 0, animeList[animeIndex].episodes[0].players[0].url);
+  });
+
+  // Obsługuje zmianę wyboru odcinka
+  document.getElementById("episode-select").addEventListener("change", (event) => {
+    const animeIndex = document.getElementById("anime-select").value;
+    const episodeIndex = event.target.value;
+    populatePlayerSelect(animeIndex, episodeIndex);
+    updatePlayer(animeIndex, episodeIndex, animeList[animeIndex].episodes[episodeIndex].players[0].url);
+  });
+
+  // Obsługuje zmianę wyboru playera
+  document.getElementById("player-select").addEventListener("change", (event) => {
+    const animeIndex = document.getElementById("anime-select").value;
+    const episodeIndex = document.getElementById("episode-select").value;
+    const playerUrl = event.target.value;
+    updatePlayer(animeIndex, episodeIndex, playerUrl);
+  });
+
+  // Ustawienia początkowe (domyślny wybór pierwszego anime, odcinka i playera)
+  populateEpisodeSelect(0);
+  populatePlayerSelect(0, 0);
+  updatePlayer(0, 0, animeList[0].episodes[0].players[0].url);
+});
