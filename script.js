@@ -1,50 +1,52 @@
-function showAnimeList() {
-    document.getElementById('anime-list').classList.remove('hidden');
-    document.querySelector('.start-button').style.display = 'none';
-    loadAnimeButtons();
-}
+document.addEventListener("DOMContentLoaded", function() {
+  const animeList = document.getElementById("anime-list");
+  const episodeList = document.getElementById("episode-list");
+  const playerList = document.getElementById("player-list");
+  const videoContainer = document.getElementById("video-container");
 
-function loadAnimeButtons() {
-    const animeList = [
-        { title: "Spy x Family", id: 1 },
-        // Inne anime można dodać tutaj
-    ];
+  function loadAnimeList() {
+    fetch("animeData.json")
+      .then(response => response.json())
+      .then(data => {
+        data.animes.forEach(anime => {
+          const animeButton = document.createElement("button");
+          animeButton.textContent = anime.title;
+          animeButton.addEventListener("click", () => {
+            history.pushState({ page: "episodes" }, "", "#episodes");
+            showAnimeEpisodes(anime);
+          });
+          animeList.appendChild(animeButton);
+        });
+      });
+  }
 
-    const container = document.getElementById("animeButtons");
-    animeList.forEach(anime => {
-        const button = document.createElement("button");
-        button.textContent = anime.title;
-        button.className = "anime-button";
-        button.onclick = () => loadEpisodePage(anime.title);
-        container.appendChild(button);
+  function showAnimeEpisodes(anime) {
+    animeList.style.display = "none";
+    episodeList.innerHTML = `<h2>${anime.title}</h2><p>${anime.description}</p>`;
+    anime.episodes.forEach(episode => {
+      const episodeButton = document.createElement("button");
+      episodeButton.textContent = `Odcinek ${episode.episodeNumber}`;
+      episodeButton.addEventListener("click", () => {
+        showPlayerOptions(episode.players);
+      });
+      episodeList.appendChild(episodeButton);
     });
-}
+    episodeList.style.display = "block";
+  }
 
-function loadEpisodePage(animeTitle) {
-    document.body.innerHTML = `
-        <h1>${animeTitle}</h1>
-        <p>Opis anime: Ciekawa historia szpiegów i niespodziewanej rodziny.</p>
-        <div id="episode-buttons">
-            <button class="episode-button" onclick="loadPlayer(1)">Odcinek 1</button>
-            <button class="episode-button" onclick="loadPlayer(2)">Odcinek 2</button>
-            <!-- Dodaj kolejne przyciski odcinków -->
-        </div>
-    `;
-}
+  function showPlayerOptions(players) {
+    playerList.innerHTML = "";
+    playerList.style.display = "block";
+    for (const [playerName, url] of Object.entries(players)) {
+      const playerButton = document.createElement("button");
+      playerButton.textContent = playerName;
+      playerButton.addEventListener("click", () => {
+        videoContainer.innerHTML = `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
+      });
+      playerList.appendChild(playerButton);
+    }
+    videoContainer.style.display = "block";
+  }
 
-function loadPlayer(episode) {
-    document.body.innerHTML = `
-        <h2>Odcinek ${episode}</h2>
-        <div class="player-container">
-            <iframe src="https://vidhidepre.com/embed/episode${episode}" frameborder="0"></iframe>
-        </div>
-        <div class="player-selection">
-            <button onclick="switchPlayer('vidhidepre')">Player 1</button>
-            <button onclick="switchPlayer('listeamed')">Player 2</button>
-        </div>
-    `;
-}
-
-function switchPlayer(playerName) {
-    console.log("Switching player to", playerName);
-}
+  loadAnimeList();
+});
