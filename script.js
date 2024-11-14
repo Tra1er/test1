@@ -1,5 +1,6 @@
 const animeData = {
   "Spy x Family": {
+    description: "Historia o rodzinie szpiegów, którzy muszą współpracować, aby przejść przez życie w tajemnicy.",
     episodes: [
       { episode: 1, players: [{ name: "VidHide", url: "https://vidhidepre.com/embed/en6ij3y36jeh.html" }, { name: "VidGuard", url: "https://listeamed.net/e/8ozgENLQAN65mjA" }] },
       { episode: 2, players: [{ name: "VidHide", url: "https://vidhidepre.com/embed/gddd7a6iilqh.html" }, { name: "VidGuard", url: "https://listeamed.net/e/k3gG5q3lnRjE1N2" }] },
@@ -17,11 +18,19 @@ const animeData = {
   }
 };
 
-document.getElementById("choose-anime").addEventListener("click", function () {
+document.getElementById("spy-family").addEventListener("click", function () {
   const animeName = "Spy x Family";
+  const animeDescription = animeData[animeName].description;
   const episodeSelector = document.querySelector(".episode-selector");
-  const playerSelector = document.querySelector(".player-selector");
   const content = document.querySelector(".content");
+
+  document.querySelector("main").innerHTML = `
+    <div class="anime-description">
+      <h2>${animeName}</h2>
+      <p>${animeDescription}</p>
+    </div>
+    <div class="episode-selector"></div>
+  `;
 
   content.classList.add("active");
 
@@ -31,33 +40,22 @@ document.getElementById("choose-anime").addEventListener("click", function () {
   episodes.forEach(episode => {
     const button = document.createElement("button");
     button.textContent = `Odcinek ${episode.episode}`;
-    button.onclick = function () {
-      loadPlayers(episode.episode);
-    };
+    button.addEventListener("click", function () {
+      const playerSelector = document.querySelector(".player-selector");
+      playerSelector.innerHTML = "";
+
+      episode.players.forEach(player => {
+        const playerButton = document.createElement("button");
+        playerButton.textContent = `Player: ${player.name}`;
+        playerButton.addEventListener("click", function () {
+          document.getElementById("video-player").src = player.url;
+          document.querySelector(".player-container").style.display = "block";
+        });
+        playerSelector.appendChild(playerButton);
+      });
+
+      playerSelector.style.display = "block";
+    });
     episodeSelector.appendChild(button);
   });
-
-  episodeSelector.style.display = "block";
 });
-
-function loadPlayers(episodeNumber) {
-  const animeName = "Spy x Family";
-  const episode = animeData[animeName].episodes.find(e => e.episode === episodeNumber);
-  const playerSelector = document.querySelector(".player-selector");
-  const playerContainer = document.querySelector(".player-container");
-
-  playerSelector.innerHTML = "";
-  playerContainer.style.display = "none";
-
-  episode.players.forEach(player => {
-    const button = document.createElement("button");
-    button.textContent = player.name;
-    button.onclick = function () {
-      document.getElementById("video-player").src = player.url;
-      playerContainer.style.display = "block";
-    };
-    playerSelector.appendChild(button);
-  });
-
-  playerSelector.style.display = "block";
-}
