@@ -1,20 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const animeIndex = urlParams.get("animeIndex");
-    const anime = animeData.anime[animeIndex];
+document.addEventListener("DOMContentLoaded", function() {
+    const selectedAnimeIndex = localStorage.getItem("selectedAnimeIndex");
+    const anime = animeData.anime[selectedAnimeIndex];
     
-    document.getElementById("anime-title").textContent = anime.title;
-    document.getElementById("anime-description").textContent = anime.description;
-    const episodeList = document.getElementById("episode-list ul");
+    const animeTitle = document.getElementById("anime-title");
+    const animeDescription = document.getElementById("anime-description");
+    const episodeList = document.getElementById("episode-list");
+    const playerSelection = document.getElementById("player-selection");
+
+    animeTitle.textContent = anime.title;
+    animeDescription.textContent = anime.description;
 
     anime.episodes.forEach((episode) => {
         const li = document.createElement("li");
-        const button = document.createElement("button");
-        button.textContent = `Odcinek ${episode.episodeNumber}`;
-        button.addEventListener("click", () => {
-            window.location.href = `player.html?animeIndex=${animeIndex}&episodeNumber=${episode.episodeNumber}`;
+        const episodeBtn = document.createElement("button");
+        episodeBtn.textContent = `Odcinek ${episode.episodeNumber}`;
+        episodeBtn.addEventListener("click", function() {
+            // Zapamiętanie wybranego odcinka i wyświetlenie playera
+            localStorage.setItem("selectedEpisode", JSON.stringify(episode));
+            playerSelection.style.display = "block";
         });
-        li.appendChild(button);
+        li.appendChild(episodeBtn);
         episodeList.appendChild(li);
+    });
+
+    document.getElementById("vidhide-player").addEventListener("click", function() {
+        const selectedEpisode = JSON.parse(localStorage.getItem("selectedEpisode"));
+        window.location.href = selectedEpisode.vidHide;
+    });
+
+    document.getElementById("vidguard-player").addEventListener("click", function() {
+        const selectedEpisode = JSON.parse(localStorage.getItem("selectedEpisode"));
+        window.location.href = selectedEpisode.vidGuard;
     });
 });
