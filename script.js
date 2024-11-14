@@ -24,6 +24,7 @@ document.getElementById("spy-family").addEventListener("click", function () {
   const episodeSelector = document.querySelector(".episode-selector");
   const content = document.querySelector(".content");
 
+  // Tworzenie struktury HTML dla opisu i odcinków
   document.querySelector("main").innerHTML = `
     <div class="anime-description">
       <h2>${animeName}</h2>
@@ -35,26 +36,29 @@ document.getElementById("spy-family").addEventListener("click", function () {
   content.classList.add("active");
 
   const episodes = animeData[animeName].episodes;
-  episodeSelector.innerHTML = "";
+  episodeSelector.innerHTML = "";  // Wyczyść poprzednie przyciski
 
+  // Dodaj przyciski dla odcinków
   episodes.forEach(episode => {
     const button = document.createElement("button");
     button.textContent = `Odcinek ${episode.episode}`;
     button.addEventListener("click", function () {
       const playerSelector = document.querySelector(".player-selector");
-      playerSelector.innerHTML = "";
+      playerSelector.innerHTML = ""; // Wyczyść poprzednie przyciski
 
+      // Dodaj przyciski dla playerów
       episode.players.forEach(player => {
         const playerButton = document.createElement("button");
         playerButton.textContent = `Player: ${player.name}`;
         playerButton.addEventListener("click", function () {
+          // Ustawienie linku do video w iframe
           document.getElementById("video-player").src = player.url;
           document.querySelector(".player-container").style.display = "block";
         });
         playerSelector.appendChild(playerButton);
       });
 
-      playerSelector.style.display = "block";
+      playerSelector.style.display = "block"; // Pokaż sekcję wyboru playera
     });
     episodeSelector.appendChild(button);
   });
