@@ -12,20 +12,22 @@
     <p>Wybierz swoje ulubione anime i zacznij oglądać!</p>
   </header>
 
-  <main id="main-content">
+  <main id="anime-list-view">
     <section class="anime-list">
-      <a href="#anime-page" id="spy-family" class="anime-button">Spy x Family</a>
-      <!-- Dodaj więcej anime w podobny sposób -->
+      <button class="anime-button" onclick="loadAnimePage('Spy x Family')">Spy x Family</button>
+      <!-- Można dodać więcej przycisków anime tutaj -->
     </section>
+  </main>
 
-    <section id="anime-page" class="anime-page" style="display: none;">
-      <div class="anime-description"></div>
-      <div class="episode-selector"></div>
-      <div class="player-container" style="display: none;">
-        <iframe id="video-player" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-        <div class="player-selector" style="display: none;"></div>
-      </div>
-    </section>
+  <main id="anime-detail-view" style="display: none;">
+    <h2 id="anime-title"></h2>
+    <p id="anime-description"></p>
+    <div class="episode-selector"></div>
+    <div class="player-container" style="display: none;">
+      <iframe id="video-player" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+      <div class="player-selector" style="display: none;"></div>
+    </div>
+    <button onclick="goBackToAnimeList()">Powrót do listy anime</button>
   </main>
 
   <script src="script.js"></script>
