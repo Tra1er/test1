@@ -1,70 +1,29 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e2e;
-    color: #e0e0f0;
+    background-color: #1c1c1c;
+    color: #f3f3f3;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
-.title {
-    font-size: 3em;
-    margin: 20px 0;
-    color: #ffc107;
-}
-
-.welcome {
-    font-size: 1.5em;
+button {
+    padding: 10px 20px;
     margin: 10px;
-}
-
-.description {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    color: #b0b0c0;
-}
-
-.start-button {
-    font-size: 1.2em;
-    padding: 15px 30px;
-    margin: 20px;
-    background-color: #ff5c5c;
-    color: white;
+    font-size: 1em;
+    color: #fff;
+    background-color: #333;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.start-button:hover {
-    background-color: #e04e4e;
+button:hover {
+    background-color: #555;
 }
 
-#anime-list {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 20px;
-    transition: opacity 0.5s;
+h1, h2 {
+    color: #f39c12;
 }
 
-.hidden {
-    display: none;
-}
-
-button.anime-button {
-    background-color: #333;
-    color: #ffc107;
-    padding: 15px;
-    font-size: 1.1em;
-    border: 2px solid #ffc107;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-button.anime-button:hover {
-    transform: scale(1.1);
+#video-frame iframe {
+    margin-top: 20px;
 }
