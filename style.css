@@ -43,14 +43,15 @@ p {
   background-color: #666;
 }
 
-.content {
+.anime-page {
   text-align: center;
   margin-top: 40px;
 }
 
 .anime-description {
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin-bottom: 20px;
+  line-height: 1.6em;
 }
 
 .episode-selector {
