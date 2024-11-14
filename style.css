@@ -22,33 +22,25 @@ header p {
     font-size: 1.2rem;
 }
 
-/* Anime List */
-.anime-list {
+/* Video Container */
+.video-container {
     display: flex;
     justify-content: center;
+    margin: 50px;
+}
+
+.video-player {
+    background-color: #000;
+    width: 80%;
+    height: 500px;
     margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
-.anime-card {
-    background-color: #333;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    width: 250px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease;
-}
-
-.anime-card:hover {
-    transform: scale(1.05);
-}
-
-.anime-card h2 {
-    font-size: 1.8rem;
-}
-
-.anime-card p {
-    font-size: 1rem;
+.player-selection {
+    text-align: center;
+    margin-top: 20px;
 }
 
 button {
@@ -65,31 +57,6 @@ button {
 
 button:hover {
     background-color: #45a049;
-}
-
-/* Episode List */
-.episode-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px;
-}
-
-.episode-button {
-    background-color: #333;
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
-
-.episode-button:hover {
-    background-color: #555;
-}
-
-.hidden {
-    display: none;
 }
 
 footer {
