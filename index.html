@@ -12,24 +12,19 @@
       <h1>Anime Streamer</h1>
       <p>Wybierz swoje ulubione anime i odcinek</p>
     </header>
-
-    <div class="anime-selector">
-      <button id="choose-anime">Wybierz Anime</button>
-    </div>
-
-    <div class="episode-selector" style="display: none;">
-      <button id="choose-episode">Wybierz Odcinek</button>
-    </div>
-
-    <div class="player-selector" style="display: none;">
-      <button id="choose-player">Wybierz Player</button>
-    </div>
-
-    <div class="player-container" style="display: none;">
-      <iframe id="video-player" width="800" height="450" frameborder="0" allowfullscreen></iframe>
-    </div>
+    <main>
+      <div class="anime-selector">
+        <button id="choose-anime">Wybierz Anime</button>
+      </div>
+      <div class="content">
+        <div class="episode-selector"></div>
+        <div class="player-selector"></div>
+      </div>
+      <div class="player-container">
+        <iframe id="video-player" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </main>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
