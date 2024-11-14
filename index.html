@@ -1,54 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Streamer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Streamer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
     <header>
-        <h1>Anime Streamer</h1>
+      <h1>Anime Streamer</h1>
+      <p>Wybierz swoje ulubione anime i odcinek</p>
     </header>
 
-    <main>
-        <h2>Wybierz anime i odcinek</h2>
-        <div id="anime-list"></div>
-    </main>
+    <section class="anime-list">
+      <h2>Lista Anime</h2>
+      <ul id="anime-list"></ul>
+    </section>
 
-    <footer>
-        <p>&copy; 2024 Anime Streamer</p>
-    </footer>
+    <section class="video-player">
+      <h2>Odtwarzacz Wideo</h2>
+      <div id="player-container"></div>
+    </section>
+  </div>
 
-    <script>
-        // Pobierz dane z animeData.json i załaduj je do strony
-        fetch('animeData.json')
-            .then(response => response.json())
-            .then(data => {
-                const animeListDiv = document.getElementById('anime-list');
-
-                data.anime.forEach(anime => {
-                    const animeItem = document.createElement('div');
-                    animeItem.classList.add('anime-item');
-                    animeItem.innerHTML = `
-                        <h3>${anime.title}</h3>
-                        <ul>
-                            ${anime.episodes.map(episode => `
-                                <li>
-                                    <strong>Odcinek ${episode.episode}</strong>
-                                    <ul>
-                                        ${episode.players.map(player => `
-                                            <li><a href="${player.url}" target="_blank">${player.name}</a></li>
-                                        `).join('')}
-                                    </ul>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    `;
-                    animeListDiv.appendChild(animeItem);
-                });
-            })
-            .catch(error => console.error('Błąd podczas ładowania danych anime:', error));
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
