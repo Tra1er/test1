@@ -133,6 +133,7 @@ function populatePlayerSelect(animeIndex, episodeIndex) {
 function updatePlayer(animeIndex, episodeIndex, playerUrl) {
   const playerContainer = document.getElementById("player-container");
   playerContainer.innerHTML = `<iframe src="${playerUrl}" frameborder="0" allowfullscreen></iframe>`;
+  playerContainer.classList.add("active");
 }
 
 // Inicjalizacja strony
@@ -145,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const animeIndex = event.target.value;
     populateEpisodeSelect(animeIndex);
     populatePlayerSelect(animeIndex, 0); // Domyślnie wybieramy pierwszy odcinek
-    updatePlayer(animeIndex, 0, animeList[animeIndex].episodes[0].players[0].url);
+    document.querySelector('.episode-selection').classList.add('active');
   });
 
   // Obsługuje zmianę wyboru odcinka
@@ -153,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const animeIndex = document.getElementById("anime-select").value;
     const episodeIndex = event.target.value;
     populatePlayerSelect(animeIndex, episodeIndex);
-    updatePlayer(animeIndex, episodeIndex, animeList[animeIndex].episodes[episodeIndex].players[0].url);
+    document.querySelector('.player-selection').classList.add('active');
   });
 
   // Obsługuje zmianę wyboru playera
