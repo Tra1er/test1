@@ -18,50 +18,46 @@ const animeData = {
 };
 
 document.getElementById("choose-anime").addEventListener("click", function () {
-  const animeName = "Spy x Family"; // Na razie wybraliśmy jedno anime statycznie
+  const animeName = "Spy x Family";
   const episodeSelector = document.querySelector(".episode-selector");
   const playerSelector = document.querySelector(".player-selector");
-  
+  const content = document.querySelector(".content");
+
+  content.classList.add("active");
+
   const episodes = animeData[animeName].episodes;
+  episodeSelector.innerHTML = "";
+
+  episodes.forEach(episode => {
+    const button = document.createElement("button");
+    button.textContent = `Odcinek ${episode.episode}`;
+    button.onclick = function () {
+      loadPlayers(episode.episode);
+    };
+    episodeSelector.appendChild(button);
+  });
 
   episodeSelector.style.display = "block";
-  episodeSelector.innerHTML = '<button id="choose-episode">Wybierz Odcinek</button>';
-
-  document.getElementById("choose-episode").addEventListener("click", function () {
-    const episodeButtons = episodes.map(episode => {
-      const button = document.createElement("button");
-      button.textContent = `Odcinek ${episode.episode}`;
-      button.onclick = function () {
-        loadPlayers(episode.episode);
-      };
-      return button;
-    });
-
-    episodeSelector.innerHTML = "";
-    episodeButtons.forEach(button => episodeSelector.appendChild(button));
-  });
 });
 
 function loadPlayers(episodeNumber) {
   const animeName = "Spy x Family";
   const episode = animeData[animeName].episodes.find(e => e.episode === episodeNumber);
   const playerSelector = document.querySelector(".player-selector");
+  const playerContainer = document.querySelector(".player-container");
+
+  playerSelector.innerHTML = "";
+  playerContainer.style.display = "none";
+
+  episode.players.forEach(player => {
+    const button = document.createElement("button");
+    button.textContent = player.name;
+    button.onclick = function () {
+      document.getElementById("video-player").src = player.url;
+      playerContainer.style.display = "block";
+    };
+    playerSelector.appendChild(button);
+  });
 
   playerSelector.style.display = "block";
-  playerSelector.innerHTML = '<button id="choose-player">Wybierz Player</button>';
-
-  document.getElementById("choose-player").addEventListener("click", function () {
-    const playerButtons = episode.players.map(player => {
-      const button = document.createElement("button");
-      button.textContent = player.name;
-      button.onclick = function () {
-        document.getElementById("video-player").src = player.url;
-        document.querySelector(".player-container").style.display = "block";
-      };
-      return button;
-    });
-
-    playerSelector.innerHTML = "";
-    playerButtons.forEach(button => playerSelector.appendChild(button));
-  });
 }
