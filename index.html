@@ -1,35 +1,22 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anime Streamer</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Streamer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Sigma sigma on the wall</h1>
-    <p>whos the skibidiest of them all</p>
-  </header>
-
-  <main id="anime-list-view">
-    <section class="anime-list">
-      <button class="anime-button" onclick="loadAnimePage('Spy x Family')">Spy x Family</button>
-      <!-- Można dodać więcej przycisków anime tutaj -->
+    <header>
+        <h1 class="title">Anime Streamer</h1>
+        <p class="welcome">Wybierz swoje ulubione anime i oglądaj z przyjemnością!</p>
+        <p class="description">Anime Streamer to miejsce, gdzie znajdziesz swoje ulubione serie i odcinki anime z różnych gatunków. Przejdź na stronę anime, aby zobaczyć pełne opisy i wybierz odcinek do oglądania.</p>
+        <button onclick="showAnimeList()" class="start-button">Zacznij</button>
+    </header>
+    <section id="anime-list" class="hidden">
+        <h2>Wybierz Anime</h2>
+        <div id="animeButtons"></div>
     </section>
-  </main>
-
-  <main id="anime-detail-view" style="display: none;">
-    <h2 id="anime-title"></h2>
-    <p id="anime-description"></p>
-    <div class="episode-selector"></div>
-    <div class="player-container" style="display: none;">
-      <iframe id="video-player" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-      <div class="player-selector" style="display: none;"></div>
-    </div>
-    <button onclick="goBackToAnimeList()">Powrót do listy anime</button>
-  </main>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
