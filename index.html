@@ -4,28 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Hub</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Anime Hub</h1>
+        <p>Twoje ulubione anime w jednym miejscu</p>
     </header>
     <main>
-        <div class="anime-list">
-            <div class="anime-card">
-                <h2>Spy x Family</h2>
-                <p>Rodzina Forgerów ukrywa wiele sekretów, ale ich historia łączy w sobie miłość i misje szpiegowskie!</p>
-                <p>Ocena: 9.1/10</p>
-                <a href="https://myanimelist.net/anime/50265/Spy_x_Family" target="_blank">Zobacz na MAL</a>
-                <button onclick="selectAnime('spy-x-family')">Wybierz</button>
-            </div>
-            <!-- Możesz dodać kolejne anime tutaj -->
-        </div>
+        <section id="anime-list">
+            <!-- Lista anime zostanie wygenerowana dynamicznie -->
+        </section>
     </main>
-    <script>
-        function selectAnime(anime) {
-            window.location.href = `${anime}.html`;
-        }
-    </script>
+    <footer>
+        <p>&copy; 2024 Anime Hub</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
