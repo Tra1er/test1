@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Streaming</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Anime Hub</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-theme">
-    <div class="container">
-        <h1>Wybierz Anime</h1>
+<body>
+    <header>
+        <h1>Anime Hub</h1>
+    </header>
+    <main>
         <div class="anime-list">
-            <div class="anime-item">
-                <a href="episodes.html?anime=SpyXFamily">
-                    <img src="spyxfamily.jpg" alt="Spy x Family">
-                    <h2>Spy x Family</h2>
-                    <p>Opis anime...</p>
-                    <p>Ocena: 8.5</p>
-                </a>
+            <div class="anime-card">
+                <h2>Spy x Family</h2>
+                <p>Rodzina Forgerów ukrywa wiele sekretów...</p>
+                <p>Ocena: 9.1/10</p>
+                <a href="https://myanimelist.net/anime/50265/Spy_x_Family" target="_blank">Zobacz na MAL</a>
+                <button onclick="selectAnime('spy-x-family')">Wybierz</button>
             </div>
-            <!-- Dodaj inne anime tutaj -->
+            <!-- Dodaj więcej anime w przyszłości -->
         </div>
-    </div>
-    <script src="script.js"></script>
+    </main>
+    <script>
+        function selectAnime(anime) {
+            window.location.href = `${anime}.html`;
+        }
+    </script>
 </body>
 </html>
