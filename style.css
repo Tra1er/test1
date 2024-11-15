@@ -1,78 +1,40 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
-    color: white;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
+header {
+    background-color: #1e1e1e;
+    padding: 1em;
     text-align: center;
 }
 
-.anime-list {
+.anime-list, .episode-list, .player-options {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.anime-item {
-    width: 30%;
-    margin-bottom: 20px;
-    text-align: center;
-    background-color: #2d2d2d;
-    padding: 15px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.anime-item:hover {
-    background-color: #444;
-}
-
-.episodes-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.episodes-list a {
-    text-decoration: none;
-    color: white;
-    background-color: #2d2d2d;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.episodes-list a:hover {
-    background-color: #444;
-}
-
-.player-select {
-    display: flex;
     justify-content: center;
-    margin-top: 20px;
+    gap: 1em;
+    padding: 2em;
 }
 
-.player-btn {
-    background-color: #333;
-    color: white;
-    padding: 10px 15px;
-    margin: 5px;
+.anime-card, .player-btn, button {
+    background: #333;
+    border: none;
     border-radius: 5px;
+    padding: 1em;
     cursor: pointer;
-}
-
-.player-btn:hover {
-    background-color: #555;
-}
-
-.video-player {
+    color: white;
     text-align: center;
+}
+
+.anime-card:hover, .player-btn:hover, button:hover {
+    background: #444;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 500px;
 }
